@@ -8,40 +8,49 @@
 import SwiftUI
 
 struct NewsView: View {
-    @State private var articles: [Article] = []
-    var keyword: String
+    var news: ResponseBody
 
     var body: some View {
-        List(articles, id: \.url) { article in
-            VStack(alignment: .leading) {
-                Text(article.title).font(.headline)
-                if let author = article.author, !author.isEmpty {
-                    Text("By \(author)").font(.subheadline).foregroundColor(.secondary)
-                }
-                if let description = article.description, !description.isEmpty {
-                    Text(description).font(.body)
-                }
-            }
-        }
-        .onAppear {
-            Task {
-                await loadNews()
-            }
-        }
-    }
+            List(news.articles, id: \.url) { article in
+                VStack(alignment: .leading) {
+                    if let urlToImage = article.urlToImage, let imageUrl = URL(string: urlToImage) {
+                        AsyncImage(url: imageUrl) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image.resizable().aspectRatio(contentMode: .fit)
+                            case .failure:
+                                Image(systemName: "photo")
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                        .frame(height: 200)
+                    }
+                    
+                    Text(article.title)
+                        .font(.headline)
+                        .padding(.bottom, 2)
 
-    private func loadNews() async {
-        let query = NewsQuery(keyword: keyword, country: nil, category: nil)
-        do {
-            let fetchedNews = try await NewsManager().getCurrentNews(query: query)
-            articles = fetchedNews.articles
-        } catch {
-            print("An error occurred: \(error)")
+                    if let author = article.author, !author.isEmpty {
+                        Text("By \(author)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .padding(.bottom, 2)
+                    }
+
+                    if let description = article.description, !description.isEmpty {
+                        Text(description)
+                            .font(.body)
+                            .padding(.bottom, 2)
+                    }
+                }
+            }
         }
-    }
 }
 
     
 #Preview {
-    NewsView(keyword: "apple")
+    NewsView(news: previewNews)
 }
