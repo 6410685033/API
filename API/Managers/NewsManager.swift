@@ -11,42 +11,29 @@ class NewsManager {
     private let apiKey = "0147ef302f4d4e15a04391b525c8c063"
     
     func getCurrentNews(query: NewsQuery? = nil) async throws -> ResponseBody {
-        let query = getParam(query: query)
+        let queryParam = getParam(query: query ?? NewsQuery())
         
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?\(query)&apiKey=\(apiKey)")
-        else {
-            fatalError("Missing URL") // guard, else
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?\(queryParam)&apiKey=\(apiKey)") else {
+            throw URLError(.badURL)
         }
         
-        let urlRequest = URLRequest(url: url) // create URL Request
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let (data, response) = try await URLSession.shared.data(from: url)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            fatalError("Error while fetching data")
-        } // as? => cast
-        let decodeData = try JSONDecoder().decode(ResponseBody.self, from: data)
+            throw URLError(.badServerResponse)
+        }
         
-        return decodeData
+        return try JSONDecoder().decode(ResponseBody.self, from: data)
     }
     
-    private func getParam(query: NewsQuery? = nil) -> String {
+    private func getParam(query: NewsQuery) -> String {
         var queryParams: [String] = []
-        
-        if let keyword = query?.keyword, !keyword.isEmpty {
-                queryParams.append("q=\(keyword)")
-            }
-            
-            if let country = query?.country, !country.isEmpty {
-                queryParams.append("country=\(country)")
-            }
-            
-            if let category = query?.category, !category.isEmpty {
-                queryParams.append("category=\(category)")
-            }
-        
-        let fullQueryString = queryParams.joined(separator: "&")
-        return fullQueryString
+        if let keyword = query.keyword, !keyword.isEmpty { queryParams.append("q=\(keyword)") }
+        if let country = query.country, !country.isEmpty { queryParams.append("country=\(country)") }
+        if let category = query.category, !category.isEmpty { queryParams.append("category=\(category)") }
+        return queryParams.joined(separator: "&")
     }
+
 }
 
 struct NewsQuery {
