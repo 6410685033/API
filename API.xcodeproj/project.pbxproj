@@ -11,13 +11,11 @@
 		7BDE9FBA2B9F1A9B0072909F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FB92B9F1A9B0072909F /* ContentView.swift */; };
 		7BDE9FBC2B9F1A9C0072909F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BDE9FBB2B9F1A9C0072909F /* Assets.xcassets */; };
 		7BDE9FBF2B9F1A9C0072909F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BDE9FBE2B9F1A9C0072909F /* Preview Assets.xcassets */; };
-		7BDE9FC72B9F26A30072909F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FC62B9F26A30072909F /* LocationManager.swift */; };
 		7BDE9FCA2B9F26EC0072909F /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FC92B9F26EC0072909F /* ModelData.swift */; };
 		7BDE9FCC2B9F27160072909F /* NewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FCB2B9F27160072909F /* NewsManager.swift */; };
 		7BDE9FD12B9F289C0072909F /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FD02B9F289C0072909F /* NewsView.swift */; };
 		7BDE9FD32B9F28E90072909F /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BDE9FD22B9F28E90072909F /* news.json */; };
 		7BDE9FD72B9F29E40072909F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FD62B9F29E40072909F /* LoadingView.swift */; };
-		7BDE9FD92B9F2A200072909F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDE9FD82B9F2A200072909F /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,13 +24,11 @@
 		7BDE9FB92B9F1A9B0072909F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7BDE9FBB2B9F1A9C0072909F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BDE9FBE2B9F1A9C0072909F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7BDE9FC62B9F26A30072909F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7BDE9FC92B9F26EC0072909F /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		7BDE9FCB2B9F27160072909F /* NewsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsManager.swift; sourceTree = "<group>"; };
 		7BDE9FD02B9F289C0072909F /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		7BDE9FD22B9F28E90072909F /* news.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
 		7BDE9FD62B9F29E40072909F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		7BDE9FD82B9F2A200072909F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +82,6 @@
 		7BDE9FC52B9F268A0072909F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				7BDE9FC62B9F26A30072909F /* LocationManager.swift */,
 				7BDE9FCB2B9F27160072909F /* NewsManager.swift */,
 			);
 			path = Managers;
@@ -107,7 +102,6 @@
 				7BDE9FB92B9F1A9B0072909F /* ContentView.swift */,
 				7BDE9FD02B9F289C0072909F /* NewsView.swift */,
 				7BDE9FD62B9F29E40072909F /* LoadingView.swift */,
-				7BDE9FD82B9F2A200072909F /* WelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,11 +180,9 @@
 				7BDE9FBA2B9F1A9B0072909F /* ContentView.swift in Sources */,
 				7BDE9FCA2B9F26EC0072909F /* ModelData.swift in Sources */,
 				7BDE9FCC2B9F27160072909F /* NewsManager.swift in Sources */,
-				7BDE9FD92B9F2A200072909F /* WelcomeView.swift in Sources */,
 				7BDE9FD12B9F289C0072909F /* NewsView.swift in Sources */,
 				7BDE9FB82B9F1A9B0072909F /* APIApp.swift in Sources */,
 				7BDE9FD72B9F29E40072909F /* LoadingView.swift in Sources */,
-				7BDE9FC72B9F26A30072909F /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

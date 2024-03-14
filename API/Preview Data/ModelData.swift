@@ -7,6 +7,7 @@
 
 import Foundation
 var previewNews: ResponseBody = try! load("news.json")
+var newsMangerPreview = NewsManager()
 
 func load<T: Decodable>(_ filename: String) throws -> T {
     let data: Data

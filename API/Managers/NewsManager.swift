@@ -8,14 +8,15 @@
 import Foundation
 
 class NewsManager: ObservableObject {
-    private let apiKey = "0147ef302f4d4e15a04391b525c8c063"    
+    private let apiKey = "0147ef302f4d4e15a04391b525c8c063"
     @Published var isLoading = false
+    @Published var news: ResponseBody?
     
     func getCurrentNews(keyword: String) async throws -> ResponseBody {
-//        let queryParam = getParam(query: query ?? NewsQuery())
         isLoading = true
         
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?q=\(keyword)&apiKey=\(apiKey)") else {
+        guard let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "https://newsapi.org/v2/top-headlines?q=\(encodedKeyword)&apiKey=\(apiKey)") else {
             throw URLError(.badURL)
         }
         
@@ -25,33 +26,18 @@ class NewsManager: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
+        isLoading = false
         return try JSONDecoder().decode(ResponseBody.self, from: data)
     }
-    
-//    private func getParam(query: NewsQuery) -> String {
-//        var queryParams: [String] = []
-//        if let keyword = query.keyword, !keyword.isEmpty { queryParams.append("q=\(keyword)") }
-//        if let country = query.country, !country.isEmpty { queryParams.append("country=\(country)") }
-//        if let category = query.category, !category.isEmpty { queryParams.append("category=\(category)") }
-//        return queryParams.joined(separator: "&")
-//    }
-
 }
-
-//struct NewsQuery {
-//    var keyword: String?
-//    var country: String?
-//    var category: String?
-//}
-
-
+    
 // Model of the response body we get from calling the News API
 struct ResponseBody: Codable {
     let status: String
     let totalResults: Int
     let articles: [Article]
 }
-
+    
 struct Article: Codable {
     let source: Source
     let author: String?
@@ -62,7 +48,7 @@ struct Article: Codable {
     let publishedAt: String
     let content: String?
 }
-
+    
 struct Source: Codable {
     let id: String?
     let name: String
